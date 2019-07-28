@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd				
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context.xsd">
+   <!-- 以上是头文件和处理指令,处理指令可根据业务扩充  -->
+   
+   <!-- 
+        bean  用来进行对象管理
+        id="" 容器管理对象的唯一标识(bean的)  也可以用name
+        class=""  要管理类的全类名
+        scope 用来设定bean的作用域  
+        singlethon默认值(单例的),不想单例 singlethon="prototype"
+        lazy-init bean延迟初始化      true(延迟初始化)容器加载不产生类对象,用的时候在产生  false(默认值)(延迟初始化:容器加载过程中产生所有类对象)
+        -->
+        
+        <!-- 全类名连方法 id连测试类 -->
+        <!-- 对象这在这步创建的 -->
+   <bean id="frist" class="spring.bean.FirstBean" ></bean>
+
+   <bean id="secondBean" class="spring.bean.SecondBean"></bean>
+
+<!-- 构造注入 -->
+   <bean id="example" class="spring.bean.ExampleBean">
+   <!-- constructor(构造)-arg(有参)带参数的构造方法   复习:构建对象要走构造方法,有参或者无参,区别就是带参数 -->
+  <!-- 想多一个对象,多写一个多一个入参(一组constructor-arg),多给有参构造方法多个入参,多个this. -->
+   <constructor-arg>
+   <!-- bean住进来的对象的唯一标识  -->
+   <ref  bean="frist"/>
+   </constructor-arg>
+   
+   </bean>
+   
+   <!-- settle注入  (也叫属性注入)
+       ref要注入得到bean的id
+       name :类中成员变量的名称
+    -->
+   <bean id="newExample" class="spring.bean.NewExampleBean">
+   <!-- 对象构成时,发现是property.找类中name对应成员变量,调用成员变量的set方法,给name赋值? -->
+   <property name="firstBean">
+   <ref bean="frist" />
+   </property>
+   
+   <!-- 想多一个就多一个property -->
+   </bean>
+</beans>
+
+
+
+
+
+
+

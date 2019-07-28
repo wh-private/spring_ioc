@@ -42,8 +42,8 @@ public static void main(String[] args) {
 	ExampleBean exam=(ExampleBean) app.getBean("example");
       // exam.test();
 
-	
 	NewExampleBean  newEx=(NewExampleBean)app.getBean("newExample");
+	
 	newEx.test();
 
 }
